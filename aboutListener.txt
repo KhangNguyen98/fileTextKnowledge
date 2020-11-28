@@ -1,0 +1,10 @@
+RequestListener là 1 class implements ServletRequestListener và mỗi interface này chấp nhận cái servletRequestEvent
+->có 2 phương thức getServletContext và getServletRequest->cái request này nó lấy cái ServletServerHttpRequest
+->cái này là interface
+
+Cái servletRequestEvent này là para nằm trong 2 phương thức của ServletRequestListener(requestInitialized,requestDestroyed
+)
+Ngoài ra nó thừa kế 1 cái interface eventlistener
+
+
+ServletRequestAttributeEvent là con của ServletRequestEvent mà thằng này lại là con của EventObject

@@ -1,0 +1,3 @@
+*Include
+jsp 2 cái chạy độc lập tự biên dịch rồi mới gộp lại
+trong khi directive thì 2 cái gộp lại rồi biên dịch

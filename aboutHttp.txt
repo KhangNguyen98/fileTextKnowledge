@@ -1,0 +1,6 @@
+Phương thức option chỉ ra rằng server sẽ hỗ trợ những phương thức nào do ko phải hầu hết server nào cũng hỗ trợ Http methods
+
+phương thức put giúp đặt resource vào trong server 
+
+
+head return response header cho phương thức get (ko phải phương thức post)

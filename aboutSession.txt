@@ -1,0 +1,12 @@
+Cookie gồm domain name,a path ,maximum age,a secure flag and Http-only flag
+
+JavaScrips ko cho access thằng cookie
+
+Về listener của session cần lưu ý có 4 cái lận =.=
++HttpSessionAttributeListener
++HttpSessionBindingListener:1  class khi implements interface này giả dụ có add 1 instance vào HttpSession bằng phương thức setAttribute 
+thì container sẽ gọi method valueBound cũng tương tự như khi dùng method removeAttribute
++HttpSessionListener catch event create and destroy of session
++HttpSessionIdListener:lắng nghe sự thay đổi id của session(cơ chế dùng 1 static Map)
+
+Khi dùng hàm invalidate thì session chỉ bị đánh dấu hủy thôi chứ chưa thực sự hủy và đồng thời lúc này nó cũng ko còn xài đc nữa

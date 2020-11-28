@@ -1,0 +1,1 @@
+c:remove nếu biến có ko tồn tại thì cũng ko quăng lỗi

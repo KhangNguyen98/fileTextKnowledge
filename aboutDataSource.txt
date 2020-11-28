@@ -1,0 +1,9 @@
+gồm name auth=container type=javax.sql.Datasource  username password driverNameClass url
+
+resource ref nằm sau welcome file list
+gồm các tag:res-ref-name(name) ,res-type(type),res-auth(auth)
+
+quy trình:
+new InitialContext().lookup("java:comp/env").lookup("name")
+Kết quả trả về theo thứ tự Context ,context, datatsource
+Rồi connection = datasource.getConnection()

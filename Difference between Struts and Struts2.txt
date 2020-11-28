@@ -1,0 +1,19 @@
+Strut2 dùng java bean thay cho action form
+
+execute trong struts 2 không còn có tham số nữa
+
+OGNL thya thế cho el(Struts)
+
+sử dụng bộ tag lib duy nhất thay cho bộ 5 tag lib của struts
+
+
+action trong struts bắt buộc phải implement action interface còn structs 2 không bắt buộc
+
+Bên struts chỉ có 1 đối tượng với các request sắp tới nên phải yêu cầu thread safe còn struts2 tạo đối tượng ứng
+với 1 request
+
+Struts áp dụng kỹ thuật của jsp để binding object vào pagecontext để kết nối còn struts2 dùng stackvalue để access
+value
+
+Struts share life cycle với mỗi module.Các actions share same life cycle in the module trong khi struts2 separate 
+life cycle với mỗi module bằng interceptor stack

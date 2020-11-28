@@ -1,0 +1,23 @@
+Các thành phần của struts:
++action form đóng vai trò như là model
++jsp đóng vai trò là view
++actionServlet là controller
+
+
+Action form thuộc về package org.apache.struts.action.ActionForm
+Action chỉ có 2 scope :request và Session(default)
+cư trú dữ liệu trả về từ Model Layer sau khi jsp cung cấp input field cho HTML form
+Action form ngoài các phương thức getter và setter ko còn con mẹ gì khác(business)
+có thể kết hợp với các action mapping
+
+form bean đại diện dữ liệu trong html form và có thể đc định nghĩa trong struct (nếu có)
+
+Hàm execute gồm ActionForm , Action Mapping nó trả về kiểu ActionForward(syntax:mapping.find("label"))-> với label 
+là 1 giá trị nào đó để MAPPING ứng với 1 thành phần xử lý tiếp theo hay 1 view nào đó tương tự như cái url mình hay
+dùng trong các servlet) nếu mà ko tìm thấy sẽ trả về 1 trang trắng
+
+
+Có 3 kiểu sử dụng forward action:
++dùng trực tiếp forward action thông qua org.apache.struts.actions.forwardAction
++tạo 1 class kế thừa action và giá trị luôn trả về 1 mapping duy nhất 
++ cách 3 éo thấy nói???

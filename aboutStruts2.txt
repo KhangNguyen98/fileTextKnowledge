@@ -1,0 +1,14 @@
+OGNL:Object graphic notation language
+
+Khi user gửi yêu cầu tới ứng dụng web,request sẽ được chuyển đến
+filterDispatcher, nó có chức năng như 1 controller
+
+Filter Dispatcher sẽ dựa trên tập tin cấu hình xem action có áp dụng intercept ko.
+_Nếu có,framework sẽ gọi inceptor theo tuần tự.Khi gọi xong
+1 inceptor framework sẽ check inceptor trong stack cho đến inceptor cuối cùng
+_Nếu ko framework sẽ gọi action.Action sẽ đón nhận dữ liệu thực hiện xử lý và thực hiện 
+hàm (mặc định là execute người dùng có thể dùng hàm khác trong tập tin cấu hình)
+
+Sau khi hàm execute đc xử lí hoàn tất sẽ trả về 1 nhãn tương tự như bên Struts
+NẾU ứng dụng có áp dụng inceptor vào Result sẽ đc apply theo chiều 
+ngược lại với chiều ban đầu để trả kết quả về hay chuyển đến action tiếp theo

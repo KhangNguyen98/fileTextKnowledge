@@ -1,0 +1,58 @@
+2 types:
+-Immediate evaluation($)
+Ngoài ra có thể dùng &#36; thay cho $ do cài này XML entity
+-Deferred evaluation(#)
+
+Nếu dùng EL với html nó chả có tác dụng gì cả
+
+Trong EL chỉ có trả về giá trị ,ko trả về tức là ko hợp lệ sẽ có lỗi vd ${A.method()}
+
+các kí tự hợp lệ trong EL:
+[]  .
+()
+unary -  
+!
+not empty
+*
+/
+div
+%
+mod
++ math
+binary -
++= string
+< lt > gt <= le >= ge
+== eq != ne
+&& and
+\\ pr
+? :(if else:mối quan hệ 3 ngôi)
+->
+=
+;
+
+
+EL có thể dùng ' ' hoặc " "
+
+LƯU Ý 4 cách khai báo hợp lệ:
+.value="${'value'}"
+.value='${"value"}'
+.value="${\"value\"}"
+.value='${\'value\'}'
+
+\nháy \nháy 
+nháy để phân biệt với 1 nháy khác("" '')
+
+Các Implicit EL
+pageContext ngoại trừ cái này còn lại là Map
+pageScope
+requestScope
+sessionScope
+applicationScope
+param and paramValues
+header and headerValues
+initParam
+cookie
+
+EL ngoài dùng . còn có thể dùng [""] EX:${pageScope["A"]}
+
+Trong EL nếu giá trị mình truyền vào mà empty hoặc null thì nó ép thành giá trị 0

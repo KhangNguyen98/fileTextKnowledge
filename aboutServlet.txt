@@ -1,0 +1,89 @@
+Khi deploy ứng dụng,CHỈ bắt đầu giai đoạn đầu của servlet-load()--- y hệt tạo vùng nhớ cho code segment
+đọc từ file web-xml đọc class rồi lib của nó
+
+Chỉ khi nào mình click button open in browser (đồng nghĩa với việc nhập 1 url và ấn enter) ->lần request đầu tiên
+bởi client gửi tới server
+
+Trong httpRequest Header
+có 1 điều cần lưu ý :giữa msg body(chứa parameter) and request header cách nhau 1 khoảng trắng
+do method show parameter ở url 
+
+1 request header phương thức get gồm những thành phần sau đây:request line,header inf và msg body
+
+msg body chứa:
++accept
++accept-encoding
++user-agent
++referencer
++host
++language
++phương thức get
++cookie
++connection
+
+còn phương thức post còn thêm content-length,content-type,cache-control
+
+all methods of http are safe :get option trace head
+All methods of http:get ,option,head trace,post,put,delete
+
+Những phương thức của httpServlet xài mà ko override sẽ bị quăng lỗi 405:method not allow
+
+PrintWriter trong servlet thuộc package java.io.Writer
+
+Method init của HttpServlet ko cần tham số trong khi thằng mà nó kế thừa tức là genericServlet lại có tham số
+Do thằng genericServlet đảm đương trách nhiệm gọi hàm ko tham số này nên ko cần phải dùng phương thức
+super.init(servletConfig) trong genericServlet.
+Hàm gốc chính xác của nó là init(servletConfig) của interface Servlet
+
+HttpServlet và GenericServlet là ABSTRACT CLASS
+
+Trong abstract class HttpServlet có 2 cái phương thức servlet 1 cái protected là của riêng nó với tham số
+HttpServletRequest,HttpServletResponse và 1 cái public void service của thằng GenericServlet với tham số 
+là ServletRequest và ServletResponse
+
+Các serlvet thuộc package java.servlet. (còn cái sau . là tên của nó )
+
+1 lưu ý nhỏ là khi dùng hàm destroy của servlet thì ko cần phải để garbage dọn vì hàm này nó đc gọi và thực thi
+ngay khi server bị crash hay application dừng hẳn.
+LƯU Ý RẰNG ngay cả khi application đã đóng nhưng server vẫn còn hoạt động ==> garbage collection có thể mất vài 
+tiếng hoặc thậm chí là lâu hơn để chạy
+Hàm destroy khi được gọi thì servlet chưa bị hủy mà chỉ đơn giản là ko còn có thể nhận được bất cứ request nào.Nó chỉ bị hủy tới khi đến tay thằng 
+Garbage Collection
+
+Ngoài mấy hàm cơ bản hay gặp của HttpServletRequest cái này nó còn có hàm
+getParameterMap ->dạng Map<String,String[]>->cái này nó lấy các para 
+
+Để đọc dữ liệu đầu ra dạng kí tự từ request dùng bufferedReader còn theo
+dạng nhị phân thì dùng ServletInputStream
+
+Có 1 điều khá thú vị trong servlet :
+nếu mà trong Servlet mà dùng cái hàm request.getInputStream sẽ quăng ra lỗi
+IllegalStateException vì cơ bản nó đã đc gọi rồi trong khi gọi hàm getReader
+thì không sao
+
+Và ngoài ra nếu thằng request.getParameter hoặc getReader đc gọi trước thì 
+thằng sau nó chả thể dùng đc
+
+Trong servlet cũng có hàm getContentLengthLong in java ee 7 còn mấy cái 
+version trước đó mún dùng phải gọi hàm getHeader("Content-Length")
+
+cả 2 thằng getInputStream và getOutputStream đều ko gọi đc do nó đã được 
+gọi sẵn rồi
+
+Lỡ  có mà ko dùng hàm setContextType thì nó cũng dùng cái defaultEncoding 
+mặc định nên sẽ ko xảy ra lỗi
+
+instantiate sau đó intialized
+instantiate:chỉ đơn giản tạo ra 1 đối tượng, cung cấp vùng nhớ(new)  còn initialized là cho nó có giá trị 
+
+phương thức out.print của response bản chất là ghi vào response message(response object chứa response mess)
+
+Câu lệnh deploy war:jar-cvf fileName.war
+
+getInputStream và getReader ->thông qua 1 cái cổng xem có gọi reader chưa nếu chưa cho thao tác trực tiếp tới stream
+còn rồi quăng lỗi 
+getInputStream cái hàm này chỉ là lấy địa chỉ trỏ tới thằng inputStream ra thôi nên có gọi bao nhiêu lần cũng ko sao
+Còn người ta hạn chế gọi thằng getInputStream hơn 1 lần vì hàm get (do ban đầu mặc định có biến check =false) nên lần đầu gọi nó tạo mới
+còn từ lần gọi thứ 2 biến check = true ->ko tạo mới nữa nên quăng lỗi
+
+lƯU Ý:nếu para ko truyền giá trị thì nó bị empty còn para ko tồn tại mà lấy thì nó bị null

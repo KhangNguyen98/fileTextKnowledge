@@ -1,0 +1,13 @@
+Coersion gồm các loại sau đây:
++Boxing
++Unboxing
++Coersion to String
++Coersion to Int
+
+
+empty and true trong coersion  -> ra false
+trong el ép kiểu với + mà giá trị ko đc khai báo (empty hoặc null) ->in ra 0
+
+nếu dùng toán tử + nó ép thành kiểu int hoặc string
+
+LƯU Ý:nếu  dùng + ép theo kiểu toán tử còn || && theo kiểu boolean

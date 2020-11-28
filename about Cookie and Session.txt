@@ -1,0 +1,2 @@
+cookie set giá trị âm tùy từng version tomcat
+còn session để âm nó tồn tại vĩnh viễn

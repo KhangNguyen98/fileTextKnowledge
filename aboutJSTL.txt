@@ -1,0 +1,57 @@
+trong c:out có phần default và escapeXML cái escape để ngăn chặn lỗ hổng gì đó
+
+c:forEach varStatus có 3 loại:count(int),current,index
+count khác index ở chỗ count bắt đầu = 1 và index = 0
+
+c:forToken có items delims dùng để lấy những kí tự phân cách
+
+c:import gồm biến var và url 
+
+c:url gồm biến var và value cái value ko cần /
+
+jstl gồm 5 loại:
+java.sun.com/jsp/jstl/..
+-core tag function
+Thằng nì lại gồm 4 loại:
++General purpose tag
++Decision Making tag
++Iteration tag
++Url related tag
+-EL function
+syntax prefix:method
+-i18n
+-sql 
+cái result có các loại:columnName,rows,rowIndex,rowCount,limitByMaxRow
+-xml tag lib
+
+JSP chứa tag lib  gồm custom tag invoke thằng custom action
+
+
+------
+Tag libraries
+gồm những tag sau:
++class tag 
++simple tag
+Hai thằng trên đc định nghĩa bởi chính nó handler class
++basic tag implements tag interface và thừa kế cái tag support
++iteration tag implements iteration interface mà thằng interface này thừa kế thằng tag interface
++complex tag implements body tag interface và thừa kế thằng body tag support
+
+Khai báo tag handler  = taglib uri="WEB-INF/tlds/TagHandler"
+
+TagSupport implements iteration tag
+BodySuppport implemnets body tag và thừa kế thằng tag support
+
+Theo quy trình của tag interface:
++setPageContext
++setParent trả về 1 cái TAG gọi là parent tag
++setXX
++int doStartTag-> if EVAL_BODY_INCLUDE returned thằng jsp process body contents
+trả SKIP_BODY nếu ko có body để chạy và trả eval_body_Include nếu body đc trả nếu cần outputStream
+và trả về EVAL_BODY_BUFFERED nếu evaluated body nằm vĩnh viễn ở buffer
+
+->thực hiện khi đụng vào cái start tag
++int doEndTag--> if EVAL_PAGE returned jsp process remainder of page
+trả cái SKIP_PAGE khi ko còn page nào và EVAL_PAGe nếu còn
+
+Hàm doAfterBody nằm giữa doStartTag và doEndTag

@@ -1,0 +1,34 @@
+Nếu 1 thằng đc khai báo trong web.xml và 1 thằng trong annotation thì thằng web.xml sẽ đc chạy trước
+
+Nếu dùng filter kiểu annotation thì nó sẽ đi theo thứ tự trong package package nào trc thì thằng filter trong nó đi trước
+
+Hàm destroy của filter đc gọi khi server bị shut down
+
+Các loại different request dispatcher types:
++normal request
++assyynchronous request
++forward request
++include request
++error request
+
+Dispatcher của filter dùng để phân loại request mà filter lọc
+
+filter mappping bởi url pattern sẽ trước thằng filter mapping bởi servlet-name
+<filter-mapping>
+<filter-name> TenFilter<filter-name>
+<servlet-name>servletname<servlet-name>
+</filter-mapping>
+
+<filter-mapping>
+<filter-name> TenFilter<filter-name>
+<url-pattern>servletname<url-pattern>
+</filter-mapping>
+
+Filter là 1 interface
+
+lợi ích giảm tốc độ băng thông,nén content truoc khi gửi,giảm tg tới response
+
+Cái Wrapper bao bọc 1 cái out.close khi đó giả dụ người dùng có lỡ mà out.close 1 trong các filter thì wrapper vẫn sẽ cho chạy tới 
+cái filter cuối lun'
+
+bản chất của out.close ko gây ra lỗi mà thực sự làm gì sau đó mới quăng lỗi

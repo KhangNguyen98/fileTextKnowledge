@@ -1,0 +1,97 @@
+có 1 class chưa đc dạy trong slide là :org.apache.jasper.runtime.HttpJspBase
+Một điều thú vị thằng này là 1 abstract class thừa kế thằng rất là quen thuộc :HttpServletRequest
+
+Tại thời điểm biên dịch, JSPCompiler biên dịch jsp thành 1 java classs mà thằng class này implement Servlet
+
+Trong JSP ,nếu bỏ dòng pageEncoding ở đầu thì khi mà ở phần head nó có viết ngôn ngữ ko phải tiếng anh sẽ xảy ra lỗi
+
+về content-type:
+response.setContentType("text/html");
+response.setCharacterEncoding(UTF-8");
+tương đương với response.setHeader("Content-Type","text/html;charset=UTF-8");
+
+Trong 3 loại comment chỉ có jsp là ko hiển thị trên jsp servlet
+dùng comment của java bắt buộc phải có scriplet
+
+Về directive cung cấp 8 cái:
++bufferer and autoFlush:mặc định là 8KB và true
++pageEncoding chỉ dùng với UTF-8
++page context-type ="text/html"
++isELIgnored nếu để true thì khi hiển thị ra cho người dùng sẽ show lun syntax của El ví dụ: ${1} chứ ko như kết quả mình mong mún
++session nếu dùng cái này thì khi xài session sẽ quăng ra lỗi 500 org.apache.jasper.JasperException: Unable to compile class for JSPs
++errorPage
++isErrorPage:nếu để true thì mới có thể xài được implicit exception
++isThreadSafe
++extends mún dùng phải khai báo package.tenclass
+
+Directive include chỉ có file ->dẫn tới static khác với jsp include(page attribute) dẫn tới dynamic
+Lưu ý trong directive include nếu để đường dẫn là absolute thì ở trong web-inf cái file named mà chứa cái directive include sẽ bao gồm 
+đường dẫn của file bị chứa.
+Còn để đường dẫn theo dạng relative nó sẽ tìm kiếm trong cùng thư mục
+
+SỰ KHÁC BIỆT GIỮA JSP:INCLUDE AND DIRECTIVE INCLUDE
++1 trong những sự khác biệt giữa jsp:include và directive include là thằng directive hoạt động ở phần compile trong khi jsp hoạt động ở phần
+run
++INCLUDE đọc nhanh hơn và chỉ đọc 1 lần nhưng sẽ khiến cho jsp dài hơn(nhưng bytecode trong java method tối đa 65534) Trong khi
+cái jsp include có thể chạy ở mỗi page load
++NGOÀI RA:cái include có thể chia sẻ các attribute với nhau trong khi jsp thì ko 
+Đc biết thêm cái thằng jsp:include nó ném thằng cái request vào lun cái thằng chứa
+
+KO nhầm dùng mấy cái jsp forward hay jsp include cái tag kết thúc của nó phải dính liền với tag khởi đầu của nó
+
+Có tận 8 cái implicit object của jsp:
++request
++response
++pageContext(chính là pageScope có thể lấy đc attribute và các scope khác)
++session
++application////cái lol này chỉ có tên là application thay vì context hay servletcontext
++config
++jspWriter
++page~~ this (nó khác với pageContext ở chỗ giả dụ trong servlet nó khai báo 1 cái declaration thì thằng page này lấy đc 
+cái thằng pageContext ko lấy đc và ngoài ra nó còn khác với cái config ở chỗ config chỉ lấy đc attribute trong khi page này có thể lấy
+các biến trong 1 servlet)
+
+
+sự khác biệt giữa response/request trong jsp implicit object so với trong servlet tụi implicit ở thời điểm run time chứ ko phải compile
+
+ko đc gọi printWriter do jsp nó gọi sẵn rồi đừng dùng mấy cái hàm như setContentType CÓ THỂ GÂY RA LỖI
+
+1 khám phá mới nữa:setContentType dù có nằm ở sau out.println() vẫn hoạt động trơn tru như bình thường
+
+Có vẻ như chỉ có hàm forward của RequestDispatcher nếu để sau cái out.close sẽ gây ra lỗi trong khi nếu như dùng include thì cái bị chứa
+sẽ không thể dùng Response Object (điều này đồng nghĩa sẽ ko hiển thị những cái mà mình mún thông qua phương thức out.println() do
+out.println() chỉ ghi vào buffer và cái mún nhắm tới lại là response object lại ko còn)
+
+jsp
++<jsp:directive.include file="/a/" >
++<jsp:include page="">
+
+jsp useBean thì phải dùng beanName,các scope của nó bao gồm session,application,request,page
+
+Có 3 kiểu khai báo dành cho jsp:getProperty
++C1:như thường lệ
++C2:property="" param="a"-->cái propery sẽ có giá trị của cái param a
++C3:phang lun cái property ="*" coi như thuộc tính ứng với param nào sẽ có giá trị của cái param đó
+
+JSP translate trước rồi mới biên dịch
+
+JSP còn hỗ trợ 1 cái gọi là jspx dùng để viết hoàn toàn bằng xml
+Có 2 cách:
++Cách 1 khai báo trong web xml
+<jsp-config>
+<jsp-property-group>
+<url-pattern>/jspx/*</url-pattern>
+<is-xml>true</is-xml>
+</jsp-property-group>
+</jsp-config>
+
++Cách 2 khai báo trong jsp document
+<jsp:root xmlmns:jsp="http://java.sun.com/JSP/Page">
+
+Jsp có hỗ trợ mấy cái về declaration scriplet and expression cứ dùng tag <jsp:...> gì đó mà phang thôi
+
+<!--> <%-- --%>
+
+Trong jsp useBean có cái id dùng để tương tác với html các kiểu còn name dùng để chuyển dữ liệu cho web server
+
+
